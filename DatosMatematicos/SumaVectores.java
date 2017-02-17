@@ -1,5 +1,5 @@
 public class SumaVectores implements Sumar {
-  public void suma (DatoMateComp dmc){
+  public void sumar (){
     System.out.println("Suma de dos vectores");
   }
 }

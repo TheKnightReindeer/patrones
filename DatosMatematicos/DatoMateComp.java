@@ -5,9 +5,10 @@ public abstract class DatoMateComp {
   private char simbolo;
 
   public void leer(){
-
   }
   public void mostrar(){
-
+  }
+  public void sumar(){
+    opSumar.sumar();
   }
 }
