@@ -1,3 +1,3 @@
 public interface Sumar {
-  public void sumar ();
+  public DatoMateComp sumar(DatoMateComp punto1, DatoMateComp punto2);
 }
