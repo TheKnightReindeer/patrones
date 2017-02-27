@@ -1,3 +1,6 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 public class ListExample extends JPanel {
    
   private BookEntry books [] = {
@@ -60,7 +63,7 @@ public class ListExample extends JPanel {
       System.out.println("Selected Elements: ");
       for(int i = 0; i < selected.length; i++){
         BookEntry element = (BookEntry)booklist.getModel().getElementAt(selected[i]);
-        System.out.println(" " + element.getTittle());
+        System.out.println(" " + element.getTitle());
       }
     }
   }

@@ -1,3 +1,4 @@
+import javax.swing.ImageIcon;
 public class BookEntry {
   private final String title;
   private final String imagePath;
