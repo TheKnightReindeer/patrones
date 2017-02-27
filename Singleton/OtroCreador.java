@@ -4,5 +4,8 @@ public class OtroCreador{
   public OtroCreador(){
     instancia = SingletonClasico.getInstancia();
   }
+  //instancia
+  //otraInstancia
+  //
 
 }

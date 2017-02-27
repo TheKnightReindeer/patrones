@@ -16,7 +16,7 @@ public class SingletonClasico {
     if(instancia == null){
       instancia = new SingletonClasico();
     }
-    System.out.println("\n Se creó una instancia");
+    // System.out.println("\n Se creó una instancia");
     return instancia;
   }
 
