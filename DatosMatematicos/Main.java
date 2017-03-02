@@ -7,6 +7,7 @@ public class Main {
     punto2.mostrar();
     punto1.ejeSumar(punto2);
     punto1.mostrar();
+    System.out.println(punto1.equals(punto2));
   }
 
   public static void sumaFraccion(){
@@ -16,11 +17,39 @@ public class Main {
     d2.mostrar();
     d1.ejeSumar(d2);
     d1.mostrar();
+    System.out.println(d1.equals(d2));
+  }
+
+  public static void  dimensiones(){
+    DatoMateComp d1 = new DimensionLineal(10, 30);
+    DatoMateComp d2 = new DimensionLineal(10, 30);
+    d1.mostrar();
+    d2.mostrar();
+    System.out.println("iguales? " + d1.equals(d2));
+  }
+
+  public static void  areas(){
+    DatoMateComp d1 = new DimensionArea(10, 30);
+    DatoMateComp d2 = new DimensionArea(5, 30);
+    d1.mostrar();
+    d2.mostrar();
+    System.out.println("iguales? " + d1.equals(d2));
+  }
+
+  public static void tiempos(){
+    DatoMateComp d1 = new Tiempo(10, 30);
+    DatoMateComp d2 = new Tiempo(5, 30);
+    d1.mostrar();
+    d2.mostrar();
+    System.out.println("iguales? " + d1.equals(d2));
   }
 
   public static void main(String [] args){
-    sumaPunto();
-    sumaFraccion();
+    // sumaPunto();
+    // sumaFraccion();
+    dimensiones();
+    areas();
+    tiempos();
   }
 
 }
