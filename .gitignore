@@ -2,3 +2,5 @@
 .*~
 *.class
 datomatcom/
+/factory/factorynb/nbproject/private/
+/factory/factorynb/build/
