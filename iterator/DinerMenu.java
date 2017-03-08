@@ -22,10 +22,7 @@ public class DinerMenu {
       numberOfItems = numberOfItems + 1;
     }
   }
-  public MenuItem[] getMenuItems(){
-    return menuItems;
-  }
-  public void createIterator(){
-
+  public Iterator createIterator(){
+    return new DinerMenuIterator(menuItems);
   }
 }
