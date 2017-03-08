@@ -1,5 +1,5 @@
 public interface Iterator {
-  public void hasNext();
-  public void next();
-  public void remove();
+  boolean hasNext();
+  Object next();
+  // public void remove();
 }

@@ -1,3 +1,4 @@
+import java.util.Iterator;
 public interface Menu {
-  public void createIterator();
+  public Iterator createIterator();
 }

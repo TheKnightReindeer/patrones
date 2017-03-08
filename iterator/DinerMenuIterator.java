@@ -1,9 +1,21 @@
 public class DinerMenuIterator implements Iterator {
-  public void hasNext(){
+  MenuItem[] items;
+  int position = 0;
 
+  public DinerMenuIterator(MenuItem[] items){
+    this.items = items;
   }
-  public void next(){
-
+  public Object next(){
+    MenuItem menuItem = items[position];
+    position = position + 1;
+    return menuItem;
+  }
+  public boolean hasNext(){
+    if(position >= items.length || items[position] == null){
+      return false;
+    }else{
+      return true;
+    }
   }
   public void remove(){
 
