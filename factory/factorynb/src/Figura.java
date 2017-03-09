@@ -4,6 +4,7 @@ public abstract class Figura {
   protected int tamaño;
   protected int posicionx;
   protected int posiciony;
+  protected Object elemento;
 
   public Figura(String n, Object v, int t, int x, int y){ 
     nombre = n;
@@ -12,8 +13,12 @@ public abstract class Figura {
     posicionx = x;
     posiciony = y;
   }
-  public void dibujar(){ //mostrar el elemento
+  public Object getValor(){
+     return valor;
   }
+  public abstract Object dibujar();//mostrar el elemento
+  //String para texto, Graphic para poligono
+  
   public void trasladar(int x, int y){ 
     System.out.println("antigua posición: (" + posicionx + " , " + posiciony + ")");
     posicionx = x;

@@ -4,7 +4,8 @@ public class Poligono extends Figura {
     System.out.println("Se ha creado un poligono");
   }
 
-  public void dibujar(){
-    System.out.println("Número de lados: " + valor);
+  public Object dibujar(){
+    //System.out.println("Número de lados: " + valor);
+    return valor;
   }
 }
