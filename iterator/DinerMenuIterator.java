@@ -1,9 +1,14 @@
 public class DinerMenuIterator implements Iterator {
-  MenuItem[] items;
-  int position = 0;
+  private MenuItem[] items;
+  private int position;
+  private int pi = 0;
+  private int pf;
 
   public DinerMenuIterator(MenuItem[] items){
     this.items = items;
+    pi = 0;
+    pf = items.length;
+    position = pi;
   }
   public Object next(){
     MenuItem menuItem = items[position];
@@ -17,7 +22,9 @@ public class DinerMenuIterator implements Iterator {
       return true;
     }
   }
-  public void remove(){
-
+  public void rango(int vi, int vf){
+    pi = vi < 0 || vi > items.length? 0 : vi;
+    pf = vf >= vi && vf <= items.length? vf : items.length;
+    position = pi;
   }
 }

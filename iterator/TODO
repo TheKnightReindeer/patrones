@@ -1,0 +1,2 @@
+implementar un método reset, (para volver a listar, con rango se puede comprobar que no reinicia)
+nueva implementacion de Iterador, uno define el rango de elementos que salta, de 2 en 2, de 3 en 3, como parámetro el número que va ir saltando, no puede ser más allá del tamaño de la lista de items

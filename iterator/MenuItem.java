@@ -17,7 +17,7 @@ public class MenuItem {
   public String getName(){
     return name;
   }
-  public String getDesctription(){
+  public String getDescription(){
     return description;
   }
   public double getPrice(){

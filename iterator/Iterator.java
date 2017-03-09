@@ -1,5 +1,5 @@
 public interface Iterator {
-  boolean hasNext();
-  Object next();
-  // public void remove();
+  public boolean hasNext();
+  public Object next();
+  public void rango(int vi, int vf);
 }
