@@ -4,6 +4,8 @@ public class Main {
     DinerMenu dm = new DinerMenu();
 
     Waitress w = new Waitress(phm, dm);
-    w.printMenu();
+    // w.printMenu();
+    // w.printRango(3, 5);
+    w.printRango(1, 9);
   }
 }

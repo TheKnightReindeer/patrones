@@ -18,7 +18,7 @@ public class PancakeHouseMenuIterator implements Iterator {
   }
   public boolean hasNext(){
     // return position < items.size() && list[position] != null;
-    return !list.isEmpty() && position < pf; //pf = items.size()
+    return !items.isEmpty() && position < pf; //pf = items.size()
   }
   public void rango(int vi, int vf){
     pi = vi < 0 || vi > items.size()? 0 : vi;
