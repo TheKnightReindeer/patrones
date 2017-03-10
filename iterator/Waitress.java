@@ -1,33 +1,36 @@
 public class Waitress {
   PancakeHouseMenu pancakeHouseMenu; //contienen la lista de items
   DinerMenu dinerMenu;
+  Iterator pancakeIterator;
+  Iterator dinerIterator;
 
   public Waitress(PancakeHouseMenu pancakeHouseMenu, DinerMenu dinerMenu){
     this.pancakeHouseMenu = pancakeHouseMenu;
     this.dinerMenu = dinerMenu;
+    pancakeIterator = pancakeHouseMenu.createIterator();
+    dinerIterator = dinerMenu.createIterator();
   }
   public void printNames(){
-    Iterator dinerIterator = dinerMenu.createIterator(); 
-    while(dinerIterator.hasNext()){
-      MenuItem menuItem = (MenuItem)dinerIterator.next(); //casting por si viene de ArrayList
+    System.out.println("Breakfast");
+    printNames(pancakeIterator);
+    System.out.println("Lunch");
+    printNames(dinerIterator);
+  }
+  private void printNames(Iterator iterator){
+    while(iterator.hasNext()){
+      MenuItem menuItem = (MenuItem)iterator.next(); //casting por si viene de ArrayList
       System.out.println(menuItem.getName());
     }
   }
 
-  public void printRango(int vi, int vf){
-    Iterator dinerIterator = dinerMenu.createIterator();
-    dinerIterator.rango(vi - 1, vf);
+  public void printRange(int vi, int vf){
     vi = vi - 1; //we're working with arrays, (starting with index 0)
-    while(dinerIterator.hasNext()){
-      MenuItem menuItem = (MenuItem)dinerIterator.next();
-      System.out.print(menuItem.getName() + ", ");
-      System.out.println(menuItem.getPrice());
-      System.out.println(menuItem.getDescription());
-    }
+    dinerIterator.rango(vi, vf);
+    printMenu(dinerIterator);
   }
   public void printMenu(){
-    Iterator pancakeIterator = pancakeHouseMenu.createIterator(); //llama al que recorre los items
-    Iterator dinerIterator = dinerMenu.createIterator(); 
+    pancakeHouseMenu.createIterator(); //llama al que recorre los items
+    dinerMenu.createIterator(); 
     System.out.println("Menu\n---\nBREAKFAST");
     printMenu(pancakeIterator); //llama al método privado
     System.out.println("\nLUNCH");
@@ -37,8 +40,8 @@ public class Waitress {
   private void printMenu(Iterator iterator){
     while(iterator.hasNext()){
       MenuItem menuItem = (MenuItem)iterator.next();
-      System.out.println(menuItem.getName() + ", ");
-      System.out.println(menuItem.getPrice() + " -- ");
+      System.out.print(menuItem.getName() + ", ");
+      System.out.println(menuItem.getPrice());
       System.out.println(menuItem.getDescription());
     }
   }
