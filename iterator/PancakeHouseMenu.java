@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+@SuppressWarnings("unchecked")
 public class PancakeHouseMenu {
   ArrayList menuItems;
   

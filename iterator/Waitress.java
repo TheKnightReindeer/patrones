@@ -25,12 +25,28 @@ public class Waitress {
 
   public void printRange(int vi, int vf){
     vi = vi - 1; //we're working with arrays, (starting with index 0)
+    pancakeIterator.rango(vi, vf);
+    System.out.println("Menu\n---\nBREAKFAST");
+    printRange(pancakeIterator, vf);
+
     dinerIterator.rango(vi, vf);
-    printMenu(dinerIterator);
+    System.out.println("\nLUNCH");
+    printRange(dinerIterator, vf);
+  }
+  private void printRange(Iterator iterator, int vf){
+    for(int i = 0; i < vf; i ++){
+      if(iterator.hasNext()){
+        MenuItem menuItem = (MenuItem)iterator.next();
+        System.out.print(menuItem.getName() + ", ");
+        System.out.println(menuItem.getPrice());
+        System.out.println(menuItem.getDescription());
+      }
+    }
+
   }
   public void printMenu(){
-    pancakeHouseMenu.createIterator(); //llama al que recorre los items
-    dinerMenu.createIterator(); 
+    // pancakeHouseMenu.createIterator(); //llama al que recorre los items
+    // dinerMenu.createIterator(); 
     System.out.println("Menu\n---\nBREAKFAST");
     printMenu(pancakeIterator); //llama al método privado
     System.out.println("\nLUNCH");
