@@ -8,6 +8,6 @@ public class Main {
     // w.printRange(1, 5);
     // w.printRange(1, 3);
     // w.printNames();
-    w.printRangeIn(1, 10, 20);
+    w.printRangeIn(1, 10, 3); //vi, vf, step
   }
 }

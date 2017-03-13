@@ -23,12 +23,13 @@ public class Waitress {
     }
   }
   public void printRangeIn(int vi, int vf, int step){
+    vi = vi - 1;
     dinerIterator.rangoEn(vi, vf, step); //una vez que modifique los apuntadores...
     pancakeIterator.rangoEn(vi, vf, step);
-    System.out.println(step);
-    System.out.println(dinerIterator.getStep());
-    System.out.println(step);
-    System.out.println(pancakeIterator.getStep());
+    // System.out.println(step);
+    // System.out.println(dinerIterator.getStep());
+    // System.out.println(step);
+    // System.out.println(pancakeIterator.getStep());
 
     // dinerIterator.rangoEn(vi, vf);
     System.out.println("\nLUNCH");
@@ -36,8 +37,22 @@ public class Waitress {
     System.out.println("Menu\n---\nBREAKFAST");
     printRangeIn(pancakeIterator, vf, pancakeIterator.getStep());
   }
-  private void printRangeIn(Iterator iterator, int vf, int jump){ //aquí llega jump, no step, porque puede que ingrese un mal step
-    //aqui haces la triquiñuela para imprimir el menú
+  private void printRangeIn(Iterator iterator, int vf, int step){ 
+    for(int i = 0; i < vf; i++){
+        if(iterator.hasNext()){
+          MenuItem menuItem = (MenuItem)iterator.next();
+          for(int j = 1; j < step; j++){
+            try{
+              menuItem = (MenuItem)iterator.next();
+            }catch(Exception e){
+              return;
+            }
+          }
+          System.out.print(menuItem.getName() + ", ");
+          System.out.println(menuItem.getPrice());
+          System.out.println(menuItem.getDescription());
+        }
+    }
   }
   public void printRange(int vi, int vf){
     vi = vi - 1; //we're working with arrays, (starting with index 0)
