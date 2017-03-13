@@ -5,8 +5,9 @@ public class Main {
 
     Waitress w = new Waitress(phm, dm);
     // w.printMenu();
-    w.printRange(1, 5);
-    w.printRange(1, 3);
+    // w.printRange(1, 5);
+    // w.printRange(1, 3);
     // w.printNames();
+    w.printRangeIn(1, 10, 20);
   }
 }

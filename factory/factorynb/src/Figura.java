@@ -26,8 +26,8 @@ public abstract class Figura {
     System.out.println("nueva posición: (" + posicionx + " , " + posiciony + ")");
   }
   public void escalar(int r){ 
-    System.out.println("antiguo tamaño: " + tamaño);
-    tamaño = tamaño * r;
-    System.out.println("nuevo tamaño: " + tamaño);
+    //System.out.println("antiguo tamaño: " + tamaño);
+    //tamaño = tamaño * r;
+    //System.out.println("nuevo tamaño: " + tamaño);
   }
 }

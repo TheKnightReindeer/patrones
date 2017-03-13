@@ -4,4 +4,7 @@ public class ManipulaPoligono extends Manipulador {
     figura = new Poligono(nombre, valor, tamaño, x, y);
     return figura;
   }
+  
+  //el manipulador debe mover y escalar
+  //figura solamente crea el elemento
 }

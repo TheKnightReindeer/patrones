@@ -22,7 +22,23 @@ public class Waitress {
       System.out.println(menuItem.getName());
     }
   }
+  public void printRangeIn(int vi, int vf, int step){
+    dinerIterator.rangoEn(vi, vf, step); //una vez que modifique los apuntadores...
+    pancakeIterator.rangoEn(vi, vf, step);
+    System.out.println(step);
+    System.out.println(dinerIterator.getStep());
+    System.out.println(step);
+    System.out.println(pancakeIterator.getStep());
 
+    // dinerIterator.rangoEn(vi, vf);
+    System.out.println("\nLUNCH");
+    printRangeIn(dinerIterator, vf, dinerIterator.getStep());
+    System.out.println("Menu\n---\nBREAKFAST");
+    printRangeIn(pancakeIterator, vf, pancakeIterator.getStep());
+  }
+  private void printRangeIn(Iterator iterator, int vf, int jump){ //aquí llega jump, no step, porque puede que ingrese un mal step
+    //aqui haces la triquiñuela para imprimir el menú
+  }
   public void printRange(int vi, int vf){
     vi = vi - 1; //we're working with arrays, (starting with index 0)
     pancakeIterator.rango(vi, vf);
@@ -42,7 +58,6 @@ public class Waitress {
         System.out.println(menuItem.getDescription());
       }
     }
-
   }
   public void printMenu(){
     // pancakeHouseMenu.createIterator(); //llama al que recorre los items
@@ -53,6 +68,8 @@ public class Waitress {
     printMenu(dinerIterator); //llama al método privado
   }
   //por qué hacer dos métodos??? (privado, público)
+  //ah pues porque el privado, recibe el iterador, como se recorren de igual manera,
+  //no se tiene que implementar un recorrido para imprimir cada menú
   private void printMenu(Iterator iterator){
     while(iterator.hasNext()){
       MenuItem menuItem = (MenuItem)iterator.next();

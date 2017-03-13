@@ -4,6 +4,7 @@ public class PancakeHouseMenuIterator implements Iterator {
   private int pi = 0;
   private int pf;
   private int position;
+  private int salto;
 
   public PancakeHouseMenuIterator(ArrayList items){
     this.items = items;
@@ -24,5 +25,22 @@ public class PancakeHouseMenuIterator implements Iterator {
     pi = vi < 0 || vi > items.size()? 0 : vi;
     pf = vf >= vi && vf <= items.size()? vf : items.size();
     position = pi;
+  }
+  public void rangoEn(int vi, int vf, int step){
+    pi = vi < 0 || vi > items.size() ? 0 : vi;
+    pf = vf >= vi && vf <= items.size() ? vf : items.size();
+    position = pi;
+    if(step > items.size()){
+      salto = items.size();
+    }else{
+      if(step < 0){
+        salto = 1;
+      }else{
+        salto = step;
+      }
+    }
+  }
+  public int getStep(){
+    return salto;
   }
 }
