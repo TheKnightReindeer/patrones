@@ -11,6 +11,8 @@ public class Menu extends MenuComponent {
   ArrayList menuComponents = new ArrayList();
   String name;
   String description;
+  //agregar atributo cantidad de elementos
+  protected int numberOfElements;
 
   public Menu(String name, String description){
     this.name = name;
@@ -18,6 +20,9 @@ public class Menu extends MenuComponent {
   }
   public void add(MenuComponent menuComponent){
     menuComponents.add(menuComponent);
+    if(menuComponent instanceof MenuItem){
+      numberOfElements++;
+    }
   }
   public void remove(MenuComponent menuComponent){
     menuComponents.remove(menuComponent);
@@ -31,9 +36,13 @@ public class Menu extends MenuComponent {
   public String getDescription(){
     return description;
   }
+  public int getNumberOfElements(){
+    return numberOfElements;
+  }
   public void print(){
     System.out.println("\n "+ getName());
     System.out.println(", " + getDescription());
+    System.out.println("Total de elementos: " + getNumberOfElements());
     System.out.println("---------------------");
     
     //se usa un iterador para imprimir todos los
