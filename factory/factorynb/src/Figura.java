@@ -6,7 +6,8 @@ public abstract class Figura {
   protected int posiciony;
   protected Object elemento;
 
-  public Figura(String n, Object v, int t, int x, int y){ 
+  public Figura(Object e, String n, Object v, int t, int x, int y){ 
+    elemento = e;
     nombre = n;
     valor = v;
     tamaño = t;
@@ -16,7 +17,7 @@ public abstract class Figura {
   public Object getValor(){
      return valor;
   }
-  public abstract Object dibujar();//mostrar el elemento
+  public abstract void dibujar();//mostrar el elemento
   //String para texto, Graphic para poligono
   
   public void trasladar(int x, int y){ 

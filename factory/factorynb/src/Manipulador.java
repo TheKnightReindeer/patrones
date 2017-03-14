@@ -4,6 +4,7 @@ public abstract class Manipulador {
   protected Figura figura;
 
   public abstract Figura crearFigura(
+    Object elemento,
     String nombre,
     Object valor,
     int tamaño,

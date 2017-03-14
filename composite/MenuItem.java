@@ -28,6 +28,9 @@ public class MenuItem extends MenuComponent {
   public double getPrice(){
     return price;
   }
+  public boolean isVegetarian(){
+    return vegetarian;
+  }
   //métodos get
   //override the print method from MenuComponent
   public void print(){

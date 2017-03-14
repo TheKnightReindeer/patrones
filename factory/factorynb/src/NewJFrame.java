@@ -139,8 +139,9 @@ public class NewJFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         m1 = new ManipulaTexto();
-        f1 = m1.crearFigura("texto1", jTextField1.getText(), 4, 0, 0);
-        jLabel2.setText((String)f1.dibujar());
+        f1 = m1.crearFigura(jLabel2, "texto1", jTextField1.getText(), 4, 0, 0);
+        //jLabel2.setText((String)f1.dibujar());
+        f1.dibujar();
         //f1.trasladar(10, 10);
     }//GEN-LAST:event_jButton1ActionPerformed
 

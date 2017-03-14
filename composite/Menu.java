@@ -40,8 +40,7 @@ public class Menu extends MenuComponent {
     //componentes, sean Menús o MenuItems
     Iterator iterator = menuComponents.iterator();
     while(iterator.hasNext()){
-      MenuComponent menuComponent = 
-        (MenuComponent)iterator.next();
+      MenuComponent menuComponent = (MenuComponent)iterator.next();
       menuComponent.print();
     }
   }
