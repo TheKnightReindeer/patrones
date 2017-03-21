@@ -2,7 +2,9 @@
 public class Main {
   public static void main(String args[]){
     Shape circle = new Circle();
+    //can decorate in one step
     Shape redCircle = new RedShapeDecorator(new Circle());
+    //or in two
     Shape redRectangle = new Rectangle();
     redRectangle = new RedShapeDecorator(redRectangle);
 
