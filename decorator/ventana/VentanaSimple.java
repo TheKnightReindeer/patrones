@@ -1,13 +1,17 @@
 import javax.swing.*;
+import java.awt.*;
 public class VentanaSimple extends JFrame implements Ventana {
   private String nombre;
+  private JFrame v;
+  private JPanel p;
 
   public VentanaSimple(String n){
     nombre = n;
-    JFrame v = new JFrame(n);
-    setLayout(null);
+    v = new JFrame(n);
+    p = new JPanel(new FlowLayout());
+    v.add(p);
     v.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    v.setSize(290, 150);
+    v.setSize(320, 240);
     v.setVisible(true);
   }
 
@@ -22,6 +26,6 @@ public class VentanaSimple extends JFrame implements Ventana {
   }
 
   public void add(Object j){
-    add((JButton)j);
+    p.add((JButton)j);
   }
 }

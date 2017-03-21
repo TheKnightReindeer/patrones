@@ -15,6 +15,6 @@ public abstract class Decorador implements Ventana {
   }
 
   public void add(Object j){
-    add((JButton)j);
+    v.add((JButton)j);
   }
 }
