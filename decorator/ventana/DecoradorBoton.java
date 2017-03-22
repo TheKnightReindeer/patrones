@@ -10,16 +10,17 @@ public class DecoradorBoton extends Decorador {
   @Override
   public void dibujar(){
     v.dibujar();
+    System.out.println("Ventana decorada con un botón");
     agregarBoton(v);
   }
 
   private void agregarBoton(Ventana v){
-    try{
-      boton = new JButton(text);
-      v.add(boton);
-      System.out.println("Ventana decorada con un botón");
-    }catch(Exception e){
-      System.out.println(e);
-    }
+    boton = new JButton(text);
+    v.add(boton);
+  }
+
+  @Override
+  public int capacidad(){
+    return v.capacidad() + 15; //agrega un peso extra por tener un botón
   }
 }

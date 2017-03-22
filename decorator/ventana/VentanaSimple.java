@@ -4,8 +4,10 @@ public class VentanaSimple extends JFrame implements Ventana {
   private String nombre;
   private JFrame v;
   private JPanel p;
+  private int kb; //indica la capacidad de la ventana (algo así como el peso que tiene)
 
-  public VentanaSimple(String n){
+  public VentanaSimple(int k, String n){
+    kb = k;
     nombre = n;
     v = new JFrame(n);
     p = new JPanel(new FlowLayout());
@@ -27,5 +29,9 @@ public class VentanaSimple extends JFrame implements Ventana {
 
   public void add(Object j){
     p.add((JButton)j);
+  }
+
+  public int capacidad(){
+    return kb;
   }
 }
