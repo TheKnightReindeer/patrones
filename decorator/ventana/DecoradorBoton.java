@@ -1,5 +1,6 @@
 import javax.swing.JButton;
-public class DecoradorBoton extends Decorador {
+import java.awt.event.*;
+public class DecoradorBoton extends Decorador implements ActionListener {
   private JButton boton;
   private String text;
   public DecoradorBoton(Ventana v, String text){
@@ -16,11 +17,16 @@ public class DecoradorBoton extends Decorador {
 
   private void agregarBoton(Ventana v){
     boton = new JButton(text);
+    boton.addActionListener(this);
     v.add(boton);
   }
 
   @Override
   public int capacidad(){
     return v.capacidad() + 15; //agrega un peso extra por tener un botón
+  }
+
+  public void actionPerformed(ActionEvent ae){
+    System.out.println("Capacidad de la ventana: " + capacidad());
   }
 }
