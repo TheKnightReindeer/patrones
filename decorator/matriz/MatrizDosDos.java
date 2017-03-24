@@ -18,5 +18,6 @@ public class MatrizDosDos implements Matriz{
       }
       System.out.println();
     }
+    System.out.println("determinante: " + determinante());
   }
 }
