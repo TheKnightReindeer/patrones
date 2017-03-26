@@ -3,9 +3,9 @@ public class Main {
     //creas un sujeto
     ConjuntoDatos s1 = new ConjuntoDatos();
     //crear un(os) observador(es) y lo suscribes a ese sujeto
-    Imprimir o1 = new Imprimir(s1);
-    Promediar o2 = new Promediar(s1);
-    Graficar o3 = new Graficar(s1);
+    Observador o1 = new Imprimir(s1);
+    Observador o2 = new Promediar(s1);
+    Observador o3 = new Graficar(s1);
     //agregas datos, y el observer debe imprimirlos
     s1.agregar(10);
     s1.agregar(2);
