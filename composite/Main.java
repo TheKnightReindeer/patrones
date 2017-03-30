@@ -1,5 +1,5 @@
 //manejar aquí toda la creación de menú y menuItems
-public class MenuTestDrive {
+public class Main {
   public static void main(String args[]){
     MenuComponent pancakeHouseMenu = new Menu("PANCAKE HOUSE MENU", "Breakfast");
     MenuComponent dinerMenu = new Menu("DINER MENU", "Lunch");
