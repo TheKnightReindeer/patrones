@@ -5,8 +5,6 @@ datomatcom/
 /factory/factorynb*
 /factory/factorynb/nbproject/private/
 /factory/factorynb/build/
-/ComponentsDerby/nbproject/private/
-/ComponentsDerby/build/
-/components/DerbyComponents/nbproject/private/
 /components/derbyComponents/build/
 /components/derbyComponents/nbproject/private/
+components/derbyComponents/
