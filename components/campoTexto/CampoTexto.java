@@ -1,19 +1,33 @@
-import javax.swing.JTextField;
+import javax.swing.*;
 import java.io.Serializable;
 import java.awt.event.*;
 
-public class CampoTexto extends JTextField implements Serializable, KeyListener {
+public class CampoTexto extends JTextField implements Serializable, KeyListener, FocusListener {
   private int longMax;
   private int longMin;
 
   public CampoTexto(){
     super();
-    longMax = 4;
-    longMin = 4;
+    longMax = 10;
+    longMin = 3;
     setColumns(longMax);
     addKeyListener(this);
+
+    //esto se ve tremendamente feo
+    setInputVerifier(new InputVerifier() {
+      public boolean verify(JComponent input) {
+        JTextField tf = (JTextField) input;
+        String cadena = tf.getText();
+        if(cadena.length() < getLongMin()){
+          System.out.println("debe ingresar un mínimo de: " + getLongMin() + " caracteres");
+          return false;
+        }
+        return true;
+      }
+    });
+
   }
-  
+
   public void setLongMax(int v){
     if(v >= longMin){
       longMax = v;
@@ -24,6 +38,10 @@ public class CampoTexto extends JTextField implements Serializable, KeyListener 
 
   public int getLongMax(){
     return longMax;
+  }
+ 
+  public int getLongMin(){
+    return longMin;
   }
 
   public void setLongMin(int v){
@@ -54,4 +72,18 @@ public class CampoTexto extends JTextField implements Serializable, KeyListener 
   public void keyReleased(KeyEvent e) {
 
   }
+
+  @Override
+  public void focusGained(FocusEvent e){
+
+  }
+
+  @Override
+  public void focusLost(FocusEvent e){
+    // String entrada = this.getText();
+    // if(entrada.length() < getLongMin()){
+    //   System.out.println("debe ingresar un minimo de: " + getLongMin() + " caracteres");
+    // }
+  }
+
 }
