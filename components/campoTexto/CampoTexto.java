@@ -1,6 +1,6 @@
 import javax.swing.JTextField;
 import java.io.Serializable;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 
 public class CampoTexto extends JTextField implements Serializable, KeyListener {
   private int longMax;
@@ -37,9 +37,21 @@ public class CampoTexto extends JTextField implements Serializable, KeyListener 
     }
   }
 
+  @Override
   public void keyPressed(KeyEvent e){
-    if(!Character.isAlphabetic(e.getKeyChar()) ){
 
+  }
+
+  @Override
+  public void keyTyped(KeyEvent e) {
+    char caracter = e.getKeyChar();
+    if(caracter >= '0' && caracter <= '9'){
+      e.consume();
     }
+  }
+
+  @Override
+  public void keyReleased(KeyEvent e) {
+
   }
 }
