@@ -87,7 +87,6 @@ public class CampoTexto extends JTextField implements Serializable, KeyListener,
     // String entrada = this.getText();
     // if(entrada.length() < getLongMin()){
     //   System.out.println("debe ingresar un minimo de: " + getLongMin() + " caracteres");
-    //   requestFocus();
     // }
   }
 
