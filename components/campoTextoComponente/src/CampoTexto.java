@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.io.Serializable;
 import java.awt.event.*;
 
-public class CampoTexto extends JTextField implements Serializable, KeyListener, FocusListener {
+public class CampoTexto extends JTextField implements Serializable, KeyListener {
   private int longMax;
   private int longMin;
 
@@ -76,18 +76,4 @@ public class CampoTexto extends JTextField implements Serializable, KeyListener,
   public void keyReleased(KeyEvent e) {
 
   }
-
-  @Override
-  public void focusGained(FocusEvent e){
-
-  }
-
-  @Override
-  public void focusLost(FocusEvent e){
-    // String entrada = this.getText();
-    // if(entrada.length() < getLongMin()){
-    //   System.out.println("debe ingresar un minimo de: " + getLongMin() + " caracteres");
-    // }
-  }
-
 }
