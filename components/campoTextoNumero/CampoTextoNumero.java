@@ -11,6 +11,7 @@ public class CampoTextoNumero extends JTextField implements KeyListener {
     super();
     limMax = 10;
     limMin = 1;
+    decimales = 2;
     setColumns(limMax);
     addKeyListener(this);
 
@@ -19,12 +20,18 @@ public class CampoTextoNumero extends JTextField implements KeyListener {
       public boolean verify(JComponent input) {
         JTextField tf = (JTextField) input;
         String cadena = tf.getText();
+        // System.out.println(cadena.substring(cadena.indexOf('.') + 1, cadena.length()));
+        if(cadena.length() == 0){
+          System.out.println("ingrese un número entre: " + getLimMin() + " y " + getLimMax());
+          return false;
+        }
         if(!Pattern.matches("\\d*\\.?\\d+", cadena)){
           System.out.println("ingrese un solo punto decimal");
           return false;
         }
-        if(cadena.length() == 0){
-          System.out.println("ingrese un número entre: " + getLimMin() + " y " + getLimMax());
+        String decs = cadena.substring(cadena.indexOf('.') + 1, cadena.length());
+        if(decs.length() < getDecimales()){
+          System.out.println("ingrese al menos: " + getDecimales() + " decimales");
           return false;
         }
         try{
@@ -51,20 +58,16 @@ public class CampoTextoNumero extends JTextField implements KeyListener {
 
   }
 
-  public void setLimMax(int v){
-    if(v >= limMin){
-      limMax = v;
-    }else{
-      limMax = limMin;
-    }
-  }
-
   public int getLimMax(){
     return limMax;
   }
 
   public int getLimMin(){
     return limMin;
+  }
+
+  public int getDecimales(){
+    return decimales;
   }
 
   public void setLimMin(int v){
@@ -75,6 +78,22 @@ public class CampoTextoNumero extends JTextField implements KeyListener {
       limMin = limMax - 1;
     }else{
       limMin = v;
+    }
+  }
+
+  public void setLimMax(int v){
+    if(v >= limMin){
+      limMax = v;
+    }else{
+      limMax = limMin;
+    }
+  }
+
+  public void setDecimales(int v){
+    if(v < 0){
+      decimales = 2;
+    }else{
+      decimales = v;
     }
   }
 

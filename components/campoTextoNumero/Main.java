@@ -22,6 +22,7 @@ public class Main extends JFrame {
     CampoTextoNumero c1 = new CampoTextoNumero();
     c1.setLimMax(100);
     CampoTextoNumero c2 = new CampoTextoNumero();
+    c2.setDecimales(5);
     CampoTextoNumero c3 = new CampoTextoNumero();
     CampoTextoNumero c4 = new CampoTextoNumero();
     f.agregar(c1);
