@@ -15,3 +15,6 @@ components/derbyComponents/
 /components/campoTextoComponente/dist/
 /components/aplicacionCampoTexto/nbproject/private/
 /components/aplicacionCampoTexto/build/
+/components/campoTextoNumero/nbproject/private/
+/components/campoTextoNumero/dist/
+/components/campoTextoNumero/build/

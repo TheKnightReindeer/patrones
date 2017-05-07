@@ -68,8 +68,10 @@
                           <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                           <Component id="campoTexto3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="campoTextoNumero1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="158" max="32767" attributes="0"/>
+                  <EmptySpace pref="161" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -95,7 +97,11 @@
                   </Group>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="67" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="campoTextoNumero1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="69" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -150,6 +156,13 @@
         <Component class="CampoTexto" name="campoTexto3">
           <Properties>
             <Property name="longMin" type="int" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="CampoTextoNumero" name="campoTextoNumero1">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel5">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="CampoTextoNumero"/>
           </Properties>
         </Component>
       </SubComponents>
