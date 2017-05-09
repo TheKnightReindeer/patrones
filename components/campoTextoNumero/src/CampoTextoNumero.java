@@ -29,11 +29,14 @@ public class CampoTextoNumero extends JTextField implements KeyListener {
           System.out.println("ingrese un solo punto decimal");
           return false;
         }
-        String decs = cadena.substring(cadena.indexOf('.') + 1, cadena.length());
-        if(decs.length() < getDecimales()){
-          System.out.println("ingrese al menos: " + getDecimales() + " decimales");
-          return false;
+        if(Pattern.matches("\\d*\\.\\d+", cadena)){
+            String decs = cadena.substring(cadena.indexOf('.') + 1, cadena.length());
+            if(decs.length() < getDecimales()){
+              System.out.println("ingrese al menos: " + getDecimales() + " decimales");
+              return false;
+            }    
         }
+        
         try{
           if(Double.parseDouble(cadena) < (double)getLimMin()){
             System.out.println("debe ingresar un número mayor a: " + getLimMin());

@@ -35,8 +35,8 @@ public class Vehiculo extends javax.swing.JFrame {
         campoTexto1 = new CampoTexto();
         campoTexto2 = new CampoTexto();
         campoTexto3 = new CampoTexto();
-        campoTextoNumero1 = new CampoTextoNumero();
         jLabel5 = new javax.swing.JLabel();
+        campoTextoNumero2 = new CampoTextoNumero();
         labels1 = new Labels();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -78,7 +78,6 @@ public class Vehiculo extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(campoTextoNumero1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jButton1)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -94,7 +93,8 @@ public class Vehiculo extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addGap(3, 3, 3)
                         .addComponent(campoTexto3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(campoTextoNumero2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -118,9 +118,9 @@ public class Vehiculo extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(41, 41, 41)
                 .addComponent(jLabel5)
-                .addGap(38, 38, 38)
-                .addComponent(campoTextoNumero1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(campoTextoNumero2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         labels1.setBottom(true);
@@ -148,7 +148,7 @@ public class Vehiculo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(labels1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         pack();
@@ -206,7 +206,7 @@ public class Vehiculo extends javax.swing.JFrame {
     private CampoTexto campoTexto1;
     private CampoTexto campoTexto2;
     private CampoTexto campoTexto3;
-    private CampoTextoNumero campoTextoNumero1;
+    private CampoTextoNumero campoTextoNumero2;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
