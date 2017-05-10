@@ -38,19 +38,19 @@ public class CampoTextoNumero extends JTextField implements KeyListener {
         }
         
         try{
-          if(Double.parseDouble(cadena) < (double)getLimMin()){
+          if(Double.parseDouble(cadena) <= (double)getLimMin()){
             System.out.println("debe ingresar un número mayor a: " + getLimMin());
             return false;
           }
-          if(Double.parseDouble(cadena) > (double)getLimMax()){
+          if(Double.parseDouble(cadena) >= (double)getLimMax()){
             System.out.println("debe ingresar un número menor a: " + getLimMax());
             return false;
           }
-          if(Integer.parseInt(cadena) < getLimMin()){
+          if(Integer.parseInt(cadena) <= getLimMin()){
             System.out.println("debe ingresar un número mayor a: " + getLimMin());
             return false;
           }
-          if(Integer.parseInt(cadena) > getLimMax()){
+          if(Integer.parseInt(cadena) >= getLimMax()){
             System.out.println("debe ingresar un número menor a: " + getLimMax());
             return false;
           }
