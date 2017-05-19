@@ -25,8 +25,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pregunta1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="125" max="32767" attributes="0"/>
+              <Component id="labels42" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -34,18 +34,20 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pregunta1" min="-2" max="-2" attributes="0"/>
+              <Component id="labels42" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="Pregunta" name="pregunta1">
+    <Component class="Labels4" name="labels42">
       <Properties>
-        <Property name="pregunta" type="java.lang.String" value="funcional"/>
-        <Property name="reactivoCorrecto" type="int" value="2"/>
-        <Property name="respuesta" type="java.lang.String" value="haskell"/>
+        <Property name="jlbottom" type="boolean" value="true"/>
+        <Property name="jltop" type="boolean" value="true"/>
+        <Property name="vbottom" type="java.lang.String" value="hola"/>
+        <Property name="vleft" type="java.lang.String" value="&lt;Not Set&gt;"/>
+        <Property name="vtop" type="java.lang.String" value="mundo"/>
       </Properties>
     </Component>
   </SubComponents>

@@ -10,8 +10,10 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,10 +29,10 @@ import mx.edu.itoaxaca.citasPacientes.modelo.Paciente;
 @WebServlet(name = "AgregarPaciente", urlPatterns = {"/AgregarPaciente"})
 public class AgregarPaciente extends HttpServlet {
     //@PersistenceUnit
-        private EntityManagerFactory emf;
+    private EntityManagerFactory emf;
 
     //@Resource
-        private UserTransaction utx;
+    private UserTransaction utx;
 
 
     /**
