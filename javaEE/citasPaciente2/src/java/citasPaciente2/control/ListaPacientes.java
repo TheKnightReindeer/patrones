@@ -67,11 +67,11 @@ public class ListaPacientes extends HttpServlet {
                 );
             for(Paciente p : listaPacientes){
                 //obteniendo la edad...
-                Date fechaHoy = new Date();
-                long milisPaciente = p.getFechanac().getTime();
-                long milisHoy = fechaHoy.getTime();
-                long edadSegundos = (milisHoy - milisPaciente) / 1000;
-                long edad = edadSegundos / (365 * 24 * 3600);
+                Date fn = p.getFechanac();
+                LocalDate cumple = LocalDate.of(fn.getYear()+1900, fn.getMonth()+1, fn.getDate());
+                LocalDate actual = LocalDate.now();
+                Period aniosCumplidos = Period.between(cumple, actual);
+                int edad = aniosCumplidos.getYears();
                 //acumulando estaturas
                 promedioEstaturas += p.getEstatura();
                 //acumulado edades
