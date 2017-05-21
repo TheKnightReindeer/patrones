@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.edu.itoaxaca.citasPacientes.control;
+package citasPaciente2.control;
 
+import citasPaciente2.modelo.Paciente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -20,35 +21,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
-import mx.edu.itoaxaca.citasPacientes.modelo.Paciente;
 
-/**;
+/**
  *
  * @author maldad
  */
 @WebServlet(name = "AgregarPaciente", urlPatterns = {"/AgregarPaciente"})
 public class AgregarPaciente extends HttpServlet {
-    //@PersistenceUnit
+
+    @PersistenceUnit
     private EntityManagerFactory emf;
-
-    //@Resource
+    @Resource
     private UserTransaction utx;
-
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        PacienteJpaController control = new PacienteJpaController(utx, emf);
+
+                    
         try (PrintWriter out = response.getWriter()) {
-            SimpleDateFormat formatoF = new SimpleDateFormat("dd/MM/yy");
+            
+            SimpleDateFormat formatoF = new SimpleDateFormat("d/M/yyyy");
             
             String nombrePaciente = request.getParameter("nombrePaciente");
             String fechaIngresada = request.getParameter("fechaNacimiento");
@@ -56,7 +51,6 @@ public class AgregarPaciente extends HttpServlet {
             try{
                 fechaParseada = formatoF.parse(fechaIngresada);
             }catch(ParseException pe){
-            
             }
             Character sexo = request.getParameter("sexo").toCharArray()[0];
             int estatura = Integer.parseInt(request.getParameter("estatura"));
@@ -67,8 +61,9 @@ public class AgregarPaciente extends HttpServlet {
             p.setSexo(sexo);
             p.setEstatura(estatura);
             
-            emf = Persistence.createEntityManagerFactory("citasPacientesPU");
-            PacienteJpaController control = new PacienteJpaController(utx, emf);
+            
+            
+            //emf = Persistence.createEntityManagerFactory("citasPacientes2PU");
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -81,20 +76,23 @@ public class AgregarPaciente extends HttpServlet {
             out.println("Fecha nacimiento: " + p.getFechanac() + "<br>");
             out.println("Sexo: " + p.getSexo() + "<br>");
             out.println("Estatura: " + p.getEstatura() + " (cms) <br>");
-            out.println("</body>");
-            out.println("</html>");
+            
             
             
             try{
                 control.create(p);
-                response.sendRedirect("index.jsp");
+                //response.sendRedirect("index.jsp");
+                out.println("<h1> agregado correctamente </h1>");
             }catch(Exception e){
                 out.println("<h1> error al agregar paciente" + request.getContextPath() + " </h1>");
             }finally{
+                out.println("<a href=\"index.jsp\">Index</a>");
+                out.println("</body>");
+                out.println("</html>");
                 out.close();
             }
+            
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -1,4 +1,4 @@
-package mx.edu.itoaxaca.citasPacientes.control.exceptions;
+package citasPaciente2.control.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

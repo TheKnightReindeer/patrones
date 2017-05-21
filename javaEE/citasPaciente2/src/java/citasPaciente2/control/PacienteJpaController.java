@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.edu.itoaxaca.citasPacientes.control;
+package citasPaciente2.control;
 
+import citasPaciente2.control.exceptions.NonexistentEntityException;
+import citasPaciente2.control.exceptions.RollbackFailureException;
+import citasPaciente2.modelo.Paciente;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -14,14 +17,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.UserTransaction;
-import mx.edu.itoaxaca.citasPacientes.control.exceptions.NonexistentEntityException;
-import mx.edu.itoaxaca.citasPacientes.control.exceptions.RollbackFailureException;
-import mx.edu.itoaxaca.citasPacientes.modelo.Paciente;
 
-/**
- *
- * @author maldad
- */
+
 public class PacienteJpaController implements Serializable {
 
     public PacienteJpaController(UserTransaction utx, EntityManagerFactory emf) {

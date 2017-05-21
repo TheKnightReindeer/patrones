@@ -1,9 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : May 12, 2017, 3:01:00 PM
-    Author     : maldad
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,5 +10,7 @@
         <a href="altaPaciente.jsp">Agregar un paciente</a>
         <br>
         <a href="citas.jsp">Citas</a>
+        <br>
+        <a href="listaPacientes.jsp">Lista de pacientes</a>
     </body>
 </html>

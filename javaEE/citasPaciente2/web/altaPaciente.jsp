@@ -1,6 +1,6 @@
 <%-- 
     Document   : altaPaciente
-    Created on : May 16, 2017, 2:29:19 PM
+    Created on : May 18, 2017, 12:25:37 AM
     Author     : maldad
 --%>
 
@@ -26,7 +26,7 @@
             </tr>
             <tr>
                 <td>Fecha Nacimiento: </td>
-                <td><input type="date" placeholder="dd/MM/aa" name="fechaNacimiento"></td>
+                <td><input type="date" placeholder="d/M/yyyy" name="fechaNacimiento"></td>
             </tr>
             <tr>
                 <td>Sexo:</td> 

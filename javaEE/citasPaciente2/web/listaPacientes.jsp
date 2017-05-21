@@ -1,10 +1,11 @@
 <%-- 
-    Document   : citas
-    Created on : May 17, 2017, 2:12:50 PM
+    Document   : listaPacientes
+    Created on : May 18, 2017, 2:35:08 PM
     Author     : maldad
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:include page="ListaPacientes"/>
 <!DOCTYPE html>
 <html>
     <head>

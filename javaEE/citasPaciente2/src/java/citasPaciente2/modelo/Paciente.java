@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mx.edu.itoaxaca.citasPacientes.modelo;
+package citasPaciente2.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -131,7 +131,7 @@ public class Paciente implements Serializable {
 
     @Override
     public String toString() {
-        return "mx.edu.itoaxaca.citasPacientes.modelo.Paciente[ idpaciente=" + idpaciente + " ]";
+        return "citasPaciente2.modelo.Paciente[ idpaciente=" + idpaciente + " ]";
     }
     
 }

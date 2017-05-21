@@ -1,4 +1,4 @@
-package mx.edu.itoaxaca.citasPacientes.control.exceptions;
+package citasPaciente2.control.exceptions;
 
 public class RollbackFailureException extends Exception {
     public RollbackFailureException(String message, Throwable cause) {
