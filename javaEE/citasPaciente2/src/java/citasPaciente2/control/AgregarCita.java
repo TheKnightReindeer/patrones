@@ -88,12 +88,40 @@ public class AgregarCita extends HttpServlet {
             out.println("<body>");
             out.println("<h1>AgregarCita </h1>");
             
-            out.println("<h1>Nueva cita para el paciente: "+ p.getNombre() +"</h1>");
+            out.println("<h1>Nueva cita para paciente: "+ p.getNombre() +"</h1>");
             //imprimir el mes actual
-            LocalDate hoy = LocalDate.now();
+            LocalDate hoy = LocalDate.of(2016, 2, 1);
             int numeroMes = hoy.getMonthValue();
             String mesActual = mesAString(numeroMes);
             out.println("<h3>" + mesActual + "</h3>");
+            
+            out.println("<table><tbody>"+
+                    "<thead>"
+                    + "<tr>"
+                    + "<td>D</td>"
+                    + "<td>L</td>"
+                    + "<td>M</td>"
+                    + "<td>M</td>"
+                    + "<td>J</td>"
+                    + "<td>V</td>"
+                    + "<td>S</td>"
+                    + "</tr>"
+                    + "</thead>");
+            out.println("<tr>");
+            for(int i = hoy.getDayOfMonth(); i <= hoy.lengthOfMonth(); i++){
+                //for(int j = 0; j < 7; j++){
+                    out.println("<td>" + i + "</td>");
+                //}
+            }
+            out.println("</tr>");
+            out.println("</tbody></table>");
+            
+            out.println("Dia:");
+            out.println("<select>");
+            for(int i = hoy.getDayOfMonth(); i <= hoy.lengthOfMonth(); i++){
+                out.println("<option>" + i + "</option>");
+            }
+            out.println("</select>");
             //out.println("CIta: " + c.getHora() + "<br>");
             //out.println("Fecha: " + c.getFecha() + "<br>");
             
