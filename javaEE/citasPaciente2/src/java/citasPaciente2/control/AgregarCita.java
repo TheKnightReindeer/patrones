@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
@@ -30,6 +31,24 @@ public class AgregarCita extends HttpServlet {
     private EntityManagerFactory emf;
     @Resource
     private UserTransaction utx;
+    
+    public String mesAString(int m){
+        switch(m){
+            case 1: return "Enero";
+            case 2: return "Febrero";
+            case 3: return "Marzo";
+            case 4: return "Abril";
+            case 5: return "Mayo";
+            case 6: return "Junio";
+            case 7: return "Julio";
+            case 8: return "Agosto";
+            case 9: return "Septiembre";
+            case 10: return "Octubre";
+            case 11: return "Noviembre";
+            case 12: return "Diciembre";
+        }
+        return "";
+    }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -70,6 +89,11 @@ public class AgregarCita extends HttpServlet {
             out.println("<h1>AgregarCita </h1>");
             
             out.println("<h1>Nueva cita para el paciente: "+ p.getNombre() +"</h1>");
+            //imprimir el mes actual
+            LocalDate hoy = LocalDate.now();
+            int numeroMes = hoy.getMonthValue();
+            String mesActual = mesAString(numeroMes);
+            out.println("<h3>" + mesActual + "</h3>");
             //out.println("CIta: " + c.getHora() + "<br>");
             //out.println("Fecha: " + c.getFecha() + "<br>");
             
