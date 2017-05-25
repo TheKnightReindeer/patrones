@@ -5,17 +5,12 @@
  */
 package citasPaciente2.control;
 
-import citasPaciente2.modelo.Cita;
 import citasPaciente2.modelo.Paciente;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -50,6 +45,8 @@ public class AgregarCita extends HttpServlet {
         return "";
     }
     
+    static int anio, mes;
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -61,7 +58,7 @@ public class AgregarCita extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             int idPaciente = Integer.parseInt(request.getParameter("idPaciente")); //viene del select
-            Cita c = new Cita();
+            //idPacienteActual = idPaciente;
             Paciente p = controlPaciente.findPaciente(idPaciente);
             //c.setPaciente(paciente);
             
@@ -77,6 +74,8 @@ public class AgregarCita extends HttpServlet {
             //imprimir el mes actual
             LocalDate hoy = LocalDate.now();
             int numeroMes = hoy.getMonthValue();
+            mes = numeroMes;
+            anio = hoy.getYear();
             String mesActual = mesAString(numeroMes);
             out.println("<h3>" + mesActual + "</h3>");
             
@@ -100,7 +99,8 @@ public class AgregarCita extends HttpServlet {
             
             for(int i = numDiaMes; i <= diasMes; i++){
                 if(numDia == dow){
-                    out.println("<td>" + i + "</td>");
+                    out.println("<td><a href=\"SeleccionHoraCita?diaCita="
+                            + i + "&idPaciente="+idPaciente+"\">"+ i +"</a></td>");
                     dow++;
                     numDia++;
                     if(dow == 8){
