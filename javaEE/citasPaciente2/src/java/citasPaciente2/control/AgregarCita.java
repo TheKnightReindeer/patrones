@@ -60,21 +60,6 @@ public class AgregarCita extends HttpServlet {
       
         try (PrintWriter out = response.getWriter()) {
             
-            //SimpleDateFormat formatoHora = new SimpleDateFormat("h:mm a");
-            //SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/M/yyyy");
-            
-            //String hora = request.getParameter("horaCita");
-            //Date horaCita = new Date();
-            
-            /*
-            String fecha = request.getParameter("fechaCita");
-            Date fechaCita = new Date();
-            try{
-                fechaCita = formatoFecha.parse(fecha);
-                horaCita = formatoFecha.parse(hora);
-            }catch(ParseException pe){
-            }
-            */
             int idPaciente = Integer.parseInt(request.getParameter("idPaciente")); //viene del select
             Cita c = new Cita();
             Paciente p = controlPaciente.findPaciente(idPaciente);
@@ -90,7 +75,7 @@ public class AgregarCita extends HttpServlet {
             
             out.println("<h1>Nueva cita para paciente: "+ p.getNombre() +"</h1>");
             //imprimir el mes actual
-            LocalDate hoy = LocalDate.of(2016, 2, 1);
+            LocalDate hoy = LocalDate.now();
             int numeroMes = hoy.getMonthValue();
             String mesActual = mesAString(numeroMes);
             out.println("<h3>" + mesActual + "</h3>");
@@ -98,33 +83,39 @@ public class AgregarCita extends HttpServlet {
             out.println("<table><tbody>"+
                     "<thead>"
                     + "<tr>"
-                    + "<td>D</td>"
                     + "<td>L</td>"
                     + "<td>M</td>"
                     + "<td>M</td>"
                     + "<td>J</td>"
                     + "<td>V</td>"
                     + "<td>S</td>"
+                    + "<td>D</td>"
                     + "</tr>"
                     + "</thead>");
             out.println("<tr>");
-            for(int i = hoy.getDayOfMonth(); i <= hoy.lengthOfMonth(); i++){
-                //for(int j = 0; j < 7; j++){
+            int numDia = hoy.getDayOfWeek().getValue();
+            int numDiaMes = hoy.getDayOfMonth();
+            int diasMes = hoy.lengthOfMonth();
+            int dow = 1; //day of week 1: lunes, 7: domingo
+            
+            for(int i = numDiaMes; i <= diasMes; i++){
+                if(numDia == dow){
                     out.println("<td>" + i + "</td>");
-                //}
+                    dow++;
+                    numDia++;
+                    if(dow == 8){
+                        dow = 1;
+                        numDia = 1;
+                        out.println("<tr></tr>");
+                    }
+                }else{
+                    out.println("<td>"+ "    " +"</td>");
+                    dow++;
+                    i = numDiaMes - 1; //sorry for this magic number :/
+                }
             }
             out.println("</tr>");
             out.println("</tbody></table>");
-            
-            out.println("Dia:");
-            out.println("<select>");
-            for(int i = hoy.getDayOfMonth(); i <= hoy.lengthOfMonth(); i++){
-                out.println("<option>" + i + "</option>");
-            }
-            out.println("</select>");
-            //out.println("CIta: " + c.getHora() + "<br>");
-            //out.println("Fecha: " + c.getFecha() + "<br>");
-            
             
             out.println("</body>");
             out.println("</html>");
