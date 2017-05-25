@@ -5,10 +5,15 @@
  */
 package citasPaciente2.control;
 
+import citasPaciente2.modelo.Cita;
 import citasPaciente2.modelo.Paciente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
@@ -58,14 +63,29 @@ public class AgregarCita extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             int idPaciente = Integer.parseInt(request.getParameter("idPaciente")); //viene del select
-            //idPacienteActual = idPaciente;
             Paciente p = controlPaciente.findPaciente(idPaciente);
-            //c.setPaciente(paciente);
+            
+            //creando lista de citas del paciente actual
+            List<Cita> listaTodasCitas = controlCita.findCitaEntities();
+            ArrayList<Integer> listaCitasPacienteX = new ArrayList<Integer>();
+            
+            //agregando citas a la lista del paciente
+            for(Cita c : listaTodasCitas){
+                Date d = c.getFecha();
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(d);
+                int diaMesCita = cal.get(Calendar.DAY_OF_MONTH);
+                
+                if(c.getPaciente().getIdpaciente() == idPaciente){
+                    listaCitasPacienteX.add(diaMesCita);
+                }
+            }
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet AgregarCita</title>");            
+            out.println("<link rel=\"stylesheet\" href=\"style.css\">");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>AgregarCita </h1>");
@@ -77,8 +97,8 @@ public class AgregarCita extends HttpServlet {
             mes = numeroMes;
             anio = hoy.getYear();
             String mesActual = mesAString(numeroMes);
+            out.println("<h2>Los dias coloreados indican que hay una cita agendada</h2>");
             out.println("<h3>" + mesActual + "</h3>");
-            
             out.println("<table><tbody>"+
                     "<thead>"
                     + "<tr>"
@@ -99,8 +119,13 @@ public class AgregarCita extends HttpServlet {
             
             for(int i = numDiaMes; i <= diasMes; i++){
                 if(numDia == dow){
-                    out.println("<td><a href=\"SeleccionHoraCita?diaCita="
+                    if(listaCitasPacienteX.contains(i)){
+                        out.println("<td class=\"hayCitaEnEsteDia\"><a href=\"SeleccionHoraCita?diaCita="
                             + i + "&idPaciente="+idPaciente+"\">"+ i +"</a></td>");
+                    }else{
+                        out.println("<td><a href=\"SeleccionHoraCita?diaCita="
+                            + i + "&idPaciente="+idPaciente+"\">"+ i +"</a></td>");
+                    }
                     dow++;
                     numDia++;
                     if(dow == 8){
