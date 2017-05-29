@@ -9,7 +9,7 @@
         <h1>Sistema de citas para pacientes</h1>
         <a href="altaPaciente.jsp">Agregar un paciente</a>
         <br>
-        <a href="citas.jsp">Citas</a>
+        <a href="citas.jsp">Lista de citas</a>
         <br>
         <a href="listaPacientes.jsp">Lista de pacientes</a>
         <br>

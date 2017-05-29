@@ -1,13 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package citasPaciente2.control;
 
+import citasPaciente2.modelo.Cita;
 import citasPaciente2.modelo.Paciente;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
@@ -21,9 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
 
 
-@WebServlet(name = "BuscarPaciente", urlPatterns = {"/BuscarPaciente"})
-public class BuscarPaciente extends HttpServlet {
-
+@WebServlet(name = "ConsultarCitasPaciente", urlPatterns = {"/ConsultarCitasPaciente"})
+public class ConsultarCitasPaciente extends HttpServlet {
+    
     @PersistenceUnit
     private EntityManagerFactory emf;
     @Resource
@@ -34,37 +33,42 @@ public class BuscarPaciente extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         emf = Persistence.createEntityManagerFactory("citasPaciente2PU2");
+        CitaJpaController controlCita = new CitaJpaController(utx, emf);
         PacienteJpaController controlPaciente = new PacienteJpaController(utx, emf);
-        List<Paciente> listaPacientes = controlPaciente.findPacienteEntities();
-            
+        List<Cita> listaCitas = controlCita.findCitaEntities();
+        
+        int idPaciente = Integer.parseInt(request.getParameter("idPaciente"));
+        Paciente p = controlPaciente.findPaciente(idPaciente);
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Seleccione Paciente</title>");            
+            out.println("<title>Servlet ConsultarCitas</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Seleccione Paciente</h1>");
             
-            out.println("<form action=\"AgregarCita\" method=\"post\">");
+            out.println("<h1>Paciente: "+p.getNombre()+"</h1>");
+            out.println("<table aling='left' width='60%' border=1>");
+            out.println(
+                "<tr><td class='datos'>Fecha</td>"
+                +"<td class='datos'>Hora</td></tr>"
+                );
             
-            
-            out.println("<select name=\"idPaciente\">");
-            out.println("<option></option>");
-            for(Paciente p : listaPacientes){
-                String elPaciente = p.getIdpaciente() + " " + p.getNombre();
-                out.println("<option value=\"" + p.getIdpaciente()
-                        + "\" label=\""+ p.getNombre() + "\"> " +
-                        elPaciente + "</option>");
+            for(Cita c : listaCitas){
+                
+                if(c.getPaciente().getIdpaciente() == idPaciente){
+                    String fecha = c.getFecha().toString();
+                    String hora = c.getHora().toString();
+                    System.out.println(fecha);
+                    System.out.println(hora);
+                    //iniciando la tabla
+                    out.println("<tr><td class='datos'>"+fecha+"</td>"
+                      +"<td class='datos'>"+hora+"</td>"
+                      );
+                }
             } //for
-            out.println("</select>");
-            
-            out.println("<br>Seleccionar hora:<br>");
-            out.println("<input type=\"number\" min=7 max=22 placeholder=\"hora\" name=\"horaCita\"<br>");
-            out.println("<input type=\"number\" min=0 max=59 placeholder=\"mins\" name=\"minutoCita\"><br>");
-            
-            out.println("<input type=\"submit\" value=\"Agregar cita\"/>");
+            out.println("</table>");
             
             out.println("</body>");
             out.println("</html>");

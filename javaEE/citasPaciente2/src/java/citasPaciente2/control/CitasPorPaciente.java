@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package citasPaciente2.control;
 
 import citasPaciente2.modelo.Paciente;
@@ -21,14 +16,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
 
 
-@WebServlet(name = "BuscarPaciente", urlPatterns = {"/BuscarPaciente"})
-public class BuscarPaciente extends HttpServlet {
-
+@WebServlet(name = "CitasPorPaciente", urlPatterns = {"/CitasPorPaciente"})
+public class CitasPorPaciente extends HttpServlet {
+    
     @PersistenceUnit
     private EntityManagerFactory emf;
     @Resource
     private UserTransaction utx;
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -36,18 +31,18 @@ public class BuscarPaciente extends HttpServlet {
         emf = Persistence.createEntityManagerFactory("citasPaciente2PU2");
         PacienteJpaController controlPaciente = new PacienteJpaController(utx, emf);
         List<Paciente> listaPacientes = controlPaciente.findPacienteEntities();
-            
+        
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Seleccione Paciente</title>");            
+            out.println("<title>Servlet CitasPorPaciente</title>");            
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Seleccione Paciente</h1>");
             
-            out.println("<form action=\"AgregarCita\" method=\"post\">");
+            out.println("<form action=\"ConsultarCitasPaciente\" method=\"post\">");
             
             
             out.println("<select name=\"idPaciente\">");
@@ -60,12 +55,7 @@ public class BuscarPaciente extends HttpServlet {
             } //for
             out.println("</select>");
             
-            out.println("<br>Seleccionar hora:<br>");
-            out.println("<input type=\"number\" min=7 max=22 placeholder=\"hora\" name=\"horaCita\"<br>");
-            out.println("<input type=\"number\" min=0 max=59 placeholder=\"mins\" name=\"minutoCita\"><br>");
-            
-            out.println("<input type=\"submit\" value=\"Agregar cita\"/>");
-            
+            out.println("<input type=\"submit\" value=\"Consultar citas\"/>");
             out.println("</body>");
             out.println("</html>");
         }
