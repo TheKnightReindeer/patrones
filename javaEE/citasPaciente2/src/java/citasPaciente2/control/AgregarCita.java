@@ -50,7 +50,7 @@ public class AgregarCita extends HttpServlet {
         return "";
     }
     
-    static int anio, mes;
+    static int anio, mes, hora, minuto;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -67,7 +67,7 @@ public class AgregarCita extends HttpServlet {
             
             //creando lista de citas del paciente actual
             List<Cita> listaTodasCitas = controlCita.findCitaEntities();
-            ArrayList<Integer> listaCitasPacienteX = new ArrayList<Integer>();
+            ArrayList<Integer> listaCitasPacientes = new ArrayList<>();
             
             //agregando citas a la lista del paciente
             for(Cita c : listaTodasCitas){
@@ -76,9 +76,9 @@ public class AgregarCita extends HttpServlet {
                 cal.setTime(d);
                 int diaMesCita = cal.get(Calendar.DAY_OF_MONTH);
                 
-                if(c.getPaciente().getIdpaciente() == idPaciente){
-                    listaCitasPacienteX.add(diaMesCita);
-                }
+                //if(c.getPaciente().getIdpaciente() == idPaciente){
+                    listaCitasPacientes.add(diaMesCita);
+                //}
             }
             
             out.println("<!DOCTYPE html>");
@@ -96,6 +96,9 @@ public class AgregarCita extends HttpServlet {
             int numeroMes = hoy.getMonthValue();
             mes = numeroMes;
             anio = hoy.getYear();
+            hora = Integer.parseInt(request.getParameter("horaCita"));
+            minuto = Integer.parseInt(request.getParameter("minutoCita"));
+            
             String mesActual = mesAString(numeroMes);
             out.println("<h2>Los dias coloreados indican que hay una cita agendada</h2>");
             out.println("<h3>" + mesActual + "</h3>");
@@ -119,9 +122,8 @@ public class AgregarCita extends HttpServlet {
             
             for(int i = numDiaMes; i <= diasMes; i++){
                 if(numDia == dow){
-                    if(listaCitasPacienteX.contains(i)){
-                        out.println("<td class=\"hayCitaEnEsteDia\"><a href=\"SeleccionHoraCita?diaCita="
-                            + i + "&idPaciente="+idPaciente+"\">"+ i +"</a></td>");
+                    if(listaCitasPacientes.contains(i)){
+                        out.println("<td class=\"hayCitaEnEsteDia\">"+ i +"</a></td>");
                     }else{
                         out.println("<td><a href=\"SeleccionHoraCita?diaCita="
                             + i + "&idPaciente="+idPaciente+"\">"+ i +"</a></td>");

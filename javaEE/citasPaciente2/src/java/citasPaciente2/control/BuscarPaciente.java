@@ -62,6 +62,11 @@ public class BuscarPaciente extends HttpServlet {
                         elPaciente + "</option>");
             } //for
             out.println("</select>");
+            
+            out.println("<br>Seleccionar hora:<br>");
+            out.println("<input type=\"number\" min=7 max=22 placeholder=\"hora\" name=\"horaCita\"<br>");
+            out.println("<input type=\"number\" min=0 max=59 placeholder=\"mins\" name=\"minutoCita\"><br>");
+            
             out.println("<input type=\"submit\" value=\"Agregar cita\"/>");
             
             out.println("</body>");

@@ -50,7 +50,7 @@ public class SeleccionHoraCita extends HttpServlet {
                     Integer.parseInt(request.getParameter("diaCita")));
             c.setFecha(fechaCita);
             
-            Date horaCita = new Time(8, 0, 0);
+            Date horaCita = new Time(AgregarCita.hora, AgregarCita.minuto, 0);
             c.setHora(horaCita);
             
             out.println("<!DOCTYPE html>");
