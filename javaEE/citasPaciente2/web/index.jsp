@@ -15,5 +15,6 @@
         <br>
         <a href="altaCita.jsp">Buscar paciente para agendar cita</a>
         <br>
+        <a href="buscarPaciente.jsp">Buscar un paciente por nombre</a>
     </body>
 </html>
