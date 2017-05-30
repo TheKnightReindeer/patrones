@@ -4,6 +4,8 @@ import citasPaciente2.modelo.Cita;
 import citasPaciente2.modelo.Paciente;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
@@ -16,57 +18,57 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
 
-
-@WebServlet(name = "ConsultarCitasPaciente", urlPatterns = {"/ConsultarCitasPaciente"})
-public class ConsultarCitasPaciente extends HttpServlet {
+@WebServlet(name = "ConsultarCitasDia", urlPatterns = {"/ConsultarCitasDia"})
+public class ConsultarCitasDia extends HttpServlet {
     
     @PersistenceUnit
     private EntityManagerFactory emf;
     @Resource
     private UserTransaction utx;
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        try (PrintWriter out = response.getWriter()) {
+            
         emf = Persistence.createEntityManagerFactory("citasPaciente2PU2");
         CitaJpaController controlCita = new CitaJpaController(utx, emf);
         PacienteJpaController controlPaciente = new PacienteJpaController(utx, emf);
         List<Cita> listaCitas = controlCita.findCitaEntities();
-        
-        int idPaciente = Integer.parseInt(request.getParameter("idPaciente"));
-        Paciente p = controlPaciente.findPaciente(idPaciente);
-        try (PrintWriter out = response.getWriter()) {
-            
+
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ConsultarCitas</title>");            
+            out.println("<title>Servlet ConsultarCitasDia</title>");            
             out.println("</head>");
             out.println("<body>");
             
-            out.println("<h1>Paciente: "+p.getNombre()+"</h1>");
+            int diaConsultado = Integer.parseInt(request.getParameter("diaCita"));
+            out.println("<h1>Lista de citas del dia: "+ diaConsultado +"</h1>");
             out.println("<table aling='left' width='60%' border=1>");
             out.println(
                 "<tr><td class='datos'>Fecha</td>"
-                +"<td class='datos'>Hora</td></tr>"
+                +"<td class='datos'>Hora</td>"
+                +"<td class='datos'>Paciente</td></tr>"
                 );
             
             for(Cita c : listaCitas){
-                
-                if(c.getPaciente().getIdpaciente() == idPaciente){
-                    String fecha = c.getFecha().toString();
-                    String hora = c.getHora().toString();
-                    System.out.println(fecha);
-                    System.out.println(hora);
-                    //iniciando la tabla
-                    out.println("<tr><td class='datos'>"+fecha+"</td>"
-                      +"<td class='datos'>"+hora+"</td>"
-                      );
-                }
+                Date d = c.getFecha();
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(d);
+                int diaMesCita = cal.get(Calendar.DAY_OF_MONTH);
+              
+            if(diaMesCita == diaConsultado){
+                Paciente p = controlPaciente.findPaciente(c.getPaciente().getIdpaciente());
+                String fecha = c.getFecha().toString();
+                String hora = c.getHora().toString();
+                out.println("<tr><td class='datos'>"+fecha+"</td>"
+                    +"<td class='datos'>"+hora+"</td>"
+                    +"<td class='datos'>"+p.getIdpaciente() +" - "+ p.getNombre()+"</td>"
+                );
+              }
             } //for
             out.println("</table>");
-            
             out.println("</body>");
             out.println("</html>");
         }

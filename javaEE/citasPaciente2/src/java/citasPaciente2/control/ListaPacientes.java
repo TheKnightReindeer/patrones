@@ -58,7 +58,7 @@ public class ListaPacientes extends HttpServlet {
 
             out.println("<h1>Servlet Lista de pacientes </h1>");
             out.println("<table aling='left' width='60%' border=1>");
-            out.println("<tr><td class='datos'ID</td>"
+            out.println("<tr><td class='datos'>ID</td>"
                 +"<td class='datos'>Nombre</td>"
                 +"<td class='datos'>Fecha Nacimiento</td>"
                 +"<td class='datos'>Edad</td>"
