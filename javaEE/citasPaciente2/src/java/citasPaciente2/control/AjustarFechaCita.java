@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package citasPaciente2.control;
 
 import citasPaciente2.modelo.Cita;
-import citasPaciente2.modelo.Paciente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
@@ -24,8 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
 
-@WebServlet(name = "AgregarCita", urlPatterns = {"/AgregarCita"})
-public class AgregarCita extends HttpServlet {
+@WebServlet(name = "AjustarFechaCita", urlPatterns = {"/AjustarFechaCita"})
+public class AjustarFechaCita extends HttpServlet {
 
     @PersistenceUnit
     private EntityManagerFactory emf;
@@ -55,19 +49,19 @@ public class AgregarCita extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        //emf = Persistence.createEntityManagerFactory("citasPacientes2PU");
-        CitaJpaController controlCita = new CitaJpaController(utx, emf);
-        PacienteJpaController controlPaciente = new PacienteJpaController(utx, emf);
-      
         try (PrintWriter out = response.getWriter()) {
             
-            int idPaciente = Integer.parseInt(request.getParameter("idPaciente")); //viene del select
-            Paciente p = controlPaciente.findPaciente(idPaciente);
+            CitaJpaController controlCita = new CitaJpaController(utx, emf);
+            int idCita = Integer.parseInt(request.getParameter("idCita"));
+            Cita modificar = controlCita.findCita(idCita);
             
-            //creando lista de citas del paciente actual
-            //udpate: no se despliegan citas por paciente, se despliegan
-            //todas las citas, se atiende UN paciente al dia
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AjustarFechaCita</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            
             List<Cita> listaTodasCitas = controlCita.findCitaEntities();
             ArrayList<Integer> listaCitasPacientes = new ArrayList<>();
             
@@ -80,16 +74,6 @@ public class AgregarCita extends HttpServlet {
                 listaCitasPacientes.add(diaMesCita);
             }
             
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AgregarCita</title>");            
-            out.println("<link rel=\"stylesheet\" href=\"style.css\">");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>AgregarCita </h1>");
-            
-            out.println("<h1>Nueva cita para paciente: "+ p.getNombre() +"</h1>");
             //imprimir el mes actual
             //LocalDate hoy = LocalDate.now();
             LocalDate hoy = LocalDate.of(2017, 6, 1);
@@ -125,8 +109,8 @@ public class AgregarCita extends HttpServlet {
                     if(listaCitasPacientes.contains(i)){
                         out.println("<td class=\"hayCitaEnEsteDia\">"+ i +"</a></td>");
                     }else{
-                        out.println("<td><a href=\"SeleccionHoraCita?diaCita="
-                            + i + "&idPaciente="+idPaciente+"\">"+ i +"</a></td>");
+                        out.println("<td><a href=\"ModificarCita?idCita="
+                            + modificar.getIdcita() + "&diaCita="+ i +"\">"+i+"</a></td>");
                     }
                     dow++;
                     numDia++;

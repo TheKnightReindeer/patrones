@@ -57,13 +57,14 @@ public class ListaPacientes extends HttpServlet {
             out.println("<body>");
 
             out.println("<h1>Servlet Lista de pacientes </h1>");
-            out.println("<table aling='left' width='60%' border=1>");
+            out.println("<table aling='left' width='80%' border=1>");
             out.println("<tr><td class='datos'>ID</td>"
                 +"<td class='datos'>Nombre</td>"
                 +"<td class='datos'>Fecha Nacimiento</td>"
                 +"<td class='datos'>Edad</td>"
                 +"<td class='datos'>Sexo</td>"
                 +"<td class='datos'>Estatura</td>"
+                +"<td>Citas</td></tr>"
                 );
             for(Paciente p : listaPacientes){
                 //obteniendo la edad...
@@ -88,6 +89,7 @@ public class ListaPacientes extends HttpServlet {
                   +"<td class='datos'>"+edad+"</td>"        
                   +"<td class='datos'>"+p.getSexo()+"</td>"
                   +"<td class='datos'>"+ mtscms +"</td>"
+                  +"<td><a href=\"ConsultarCitasPaciente?idPaciente="+p.getIdpaciente()+"\">Ver agenda</a></td></tr>"
                   );
             } //for
             out.println("</table>");

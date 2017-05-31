@@ -49,7 +49,10 @@ public class ConsultarCitasPaciente extends HttpServlet {
             out.println("<table aling='left' width='60%' border=1>");
             out.println(
                 "<tr><td class='datos'>Fecha</td>"
-                +"<td class='datos'>Hora</td></tr>"
+                +"<td class='datos'>Hora</td>"
+                +"<td>Modificar</td>"
+                +"<td>Eliminar</td>"
+                + "</tr>"
                 );
             
             for(Cita c : listaCitas){
@@ -62,6 +65,9 @@ public class ConsultarCitasPaciente extends HttpServlet {
                     //iniciando la tabla
                     out.println("<tr><td class='datos'>"+fecha+"</td>"
                       +"<td class='datos'>"+hora+"</td>"
+                      +"<td><a href=\"AjustarCita?idCita="+c.getIdcita()+"\">Modificar cita</a></td>"
+                      +"<td><a href=\"EliminarCita?idCita="+c.getIdcita()+"\">Eliminar cita</a></td>"
+                      +"</tr>"
                       );
                 }
             } //for

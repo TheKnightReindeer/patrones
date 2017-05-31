@@ -1,12 +1,13 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package citasPaciente2.control;
 
 import citasPaciente2.modelo.Cita;
-import citasPaciente2.modelo.Paciente;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -18,60 +19,50 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
 
-@WebServlet(name = "ConsultarCitasDia", urlPatterns = {"/ConsultarCitasDia"})
-public class ConsultarCitasDia extends HttpServlet {
-    
+/**
+ *
+ * @author maldad
+ */
+@WebServlet(name = "EliminarCita", urlPatterns = {"/EliminarCita"})
+public class EliminarCita extends HttpServlet {
+
     @PersistenceUnit
     private EntityManagerFactory emf;
     @Resource
     private UserTransaction utx;
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
         emf = Persistence.createEntityManagerFactory("citasPaciente2PU2");
+        
         try (PrintWriter out = response.getWriter()) {
             
-        
-        CitaJpaController controlCita = new CitaJpaController(utx, emf);
-        PacienteJpaController controlPaciente = new PacienteJpaController(utx, emf);
-        List<Cita> listaCitas = controlCita.findCitaEntities();
-
+            CitaJpaController controlCita = new CitaJpaController(utx, emf);
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ConsultarCitasDia</title>");            
+            out.println("<title>Servlet EliminarCita</title>");            
             out.println("</head>");
             out.println("<body>");
+            int idCita = Integer.parseInt(request.getParameter("idCita"));
+            Cita c = controlCita.findCita(idCita);
             
-            int diaConsultado = Integer.parseInt(request.getParameter("diaCita"));
-            out.println("<h1>Lista de citas del dia: "+ diaConsultado +"</h1>");
-            out.println("<table aling='left' width='60%' border=1>");
-            out.println(
-                "<tr><td class='datos'>Fecha</td>"
-                +"<td class='datos'>Hora</td>"
-                +"<td class='datos'>Paciente</td></tr>"
-                );
-            
-            for(Cita c : listaCitas){
-                Date d = c.getFecha();
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(d);
-                int diaMesCita = cal.get(Calendar.DAY_OF_MONTH);
-              
-            if(diaMesCita == diaConsultado){
-                Paciente p = controlPaciente.findPaciente(c.getPaciente().getIdpaciente());
-                String fecha = c.getFecha().toString();
-                String hora = c.getHora().toString();
-                out.println("<tr><td class='datos'>"+fecha+"</td>"
-                    +"<td class='datos'>"+hora+"</td>"
-                    +"<td class='datos'>"+p.getIdpaciente() +" - "+ p.getNombre()+"</td>"
-                );
-              }
-            } //for
-            out.println("</table>");
-            out.println("</body>");
-            out.println("</html>");
+            try{
+                //controlCita.create(c);
+                controlCita.destroy(c.getIdcita());
+                //response.sendRedirect("index.jsp");
+                out.println("<h1> eliminada correctamente </h1>");
+            }catch(Exception e){
+                out.println("<h1> error al agregar cita" + request.getContextPath() + " </h1>");
+            }finally{
+                out.println("<a href=\"index.jsp\">Index</a>");
+                out.println("</body>");
+                out.println("</html>");
+                out.close();
+            }
         }
     }
 

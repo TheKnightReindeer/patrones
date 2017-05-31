@@ -5,8 +5,6 @@
  */
 package citasPaciente2.control;
 
-import citasPaciente2.modelo.Cita;
-import citasPaciente2.modelo.Paciente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -35,9 +33,10 @@ public class ListarBusquedaPaciente extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+        emf = Persistence.createEntityManagerFactory("citasPaciente2PU2");
+        
         try (PrintWriter out = response.getWriter()) {
-            emf = Persistence.createEntityManagerFactory("citasPaciente2PU2");
-            PacienteJpaController controlPaciente = new PacienteJpaController(utx, emf);
+            
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");
