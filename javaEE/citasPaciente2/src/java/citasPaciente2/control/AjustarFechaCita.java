@@ -59,6 +59,7 @@ public class AjustarFechaCita extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet AjustarFechaCita</title>");            
+            out.println("<link rel=\"stylesheet\" href=\"style.css\">");
             out.println("</head>");
             out.println("<body>");
             

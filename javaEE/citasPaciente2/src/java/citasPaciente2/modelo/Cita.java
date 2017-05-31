@@ -20,6 +20,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -35,6 +36,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Cita.findByHora", query = "SELECT c FROM Cita c WHERE c.hora = :hora")
     , @NamedQuery(name = "Cita.findByFecha", query = "SELECT c FROM Cita c WHERE c.fecha = :fecha")})
 public class Cita implements Serializable {
+
+    @Size(max = 30)
+    @Column(name = "ESTATUS")
+    private String estatus;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -114,6 +119,14 @@ public class Cita implements Serializable {
     @Override
     public String toString() {
         return "citasPaciente2.modelo.Cita[ idcita=" + idcita + " ]";
+    }
+
+    public String getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(String estatus) {
+        this.estatus = estatus;
     }
     
 }

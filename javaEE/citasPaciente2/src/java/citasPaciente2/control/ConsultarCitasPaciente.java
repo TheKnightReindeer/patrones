@@ -4,6 +4,8 @@ import citasPaciente2.modelo.Cita;
 import citasPaciente2.modelo.Paciente;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
@@ -36,6 +38,8 @@ public class ConsultarCitasPaciente extends HttpServlet {
         
         int idPaciente = Integer.parseInt(request.getParameter("idPaciente"));
         Paciente p = controlPaciente.findPaciente(idPaciente);
+        LocalDate hoy = LocalDate.now();
+        Date hoyDate = new Date(hoy.getYear() - 1900, hoy.getMonthValue() - 1, hoy.getDayOfMonth());
         try (PrintWriter out = response.getWriter()) {
             
             out.println("<!DOCTYPE html>");
@@ -60,19 +64,29 @@ public class ConsultarCitasPaciente extends HttpServlet {
                 if(c.getPaciente().getIdpaciente() == idPaciente){
                     String fecha = c.getFecha().toString();
                     String hora = c.getHora().toString();
-                    System.out.println(fecha);
-                    System.out.println(hora);
-                    //iniciando la tabla
-                    out.println("<tr><td class='datos'>"+fecha+"</td>"
+                    
+                    System.out.println(hoyDate);
+                    System.out.println(c.getFecha());
+                    
+                    if(hoyDate.compareTo(c.getFecha()) >= 0){
+                       out.println("<tr><td class='datos'>"+fecha+"</td>"
+                      +"<td class='datos'>"+hora+"</td>"
+                      +"<td>Modificar cita</td>"
+                      +"<td>Eliminar cita</a></td>"
+                      +"</tr>"
+                      ); 
+                    }else{
+                        out.println("<tr><td class='datos'>"+fecha+"</td>"
                       +"<td class='datos'>"+hora+"</td>"
                       +"<td><a href=\"AjustarCita?idCita="+c.getIdcita()+"\">Modificar cita</a></td>"
                       +"<td><a href=\"EliminarCita?idCita="+c.getIdcita()+"\">Eliminar cita</a></td>"
                       +"</tr>"
                       );
+                    }
                 }
             } //for
             out.println("</table>");
-            
+            out.println("<a href=\"index.jsp\">Index</a>");
             out.println("</body>");
             out.println("</html>");
         }
