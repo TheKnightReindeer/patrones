@@ -5,7 +5,8 @@ public class Proceso implements Runnable {
 
   @Override
   public void run() {
-    osc =  SingletonClasico.getInstancia();
+    // osc =  SingletonClasico.getInstancia();
+    osc =  new SingletonClasico();
     System.out.println("Se creo una nueva instancia "+osc.numInstancia());
     try {
       Thread.sleep(1000);
@@ -13,7 +14,8 @@ public class Proceso implements Runnable {
       // Logger.getLogger(Proceso.class.getName()).log(Level.SEVERE, null, ex);
       System.out.println(ex);
     }
-    osc = SingletonClasico.getInstancia();
+    // osc = SingletonClasico.getInstancia();
+    osc = new SingletonClasico();
     System.out.println("Se creo una nueva instancia " + osc.numInstancia());
     try {
       Thread.sleep(1000);

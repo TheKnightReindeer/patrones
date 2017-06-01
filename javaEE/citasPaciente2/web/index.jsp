@@ -18,5 +18,7 @@
         <a href="buscarPaciente.jsp">Buscar un paciente por nombre</a>
         <br>
         <a href="consultas.jsp">Consultas</a>
+        <br>
+        <!--<a href="estatus.jsp">Estatus de las citas</a>-->
     </body>
 </html>

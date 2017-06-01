@@ -7,7 +7,7 @@ public class SingletonClasico {
   //instancia = new SingletonClasico();
   //}
 
-  protected SingletonClasico(){
+  public SingletonClasico(){
     //Existe sólo para evitar que se cree con new fuera de aquí
     numIns++;
   }

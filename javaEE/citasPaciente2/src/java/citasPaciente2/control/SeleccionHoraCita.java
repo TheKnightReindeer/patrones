@@ -53,6 +53,7 @@ public class SeleccionHoraCita extends HttpServlet {
             
             Date horaCita = new Time(AgregarCita.hora, AgregarCita.minuto, 0);
             c.setHora(horaCita);
+            c.setEstatus("pendiente");
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");

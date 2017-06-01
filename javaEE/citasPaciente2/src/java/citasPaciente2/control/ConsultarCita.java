@@ -85,6 +85,7 @@ public class ConsultarCita extends HttpServlet {
             }
             out.println("</tr>");
             out.println("</tbody></table>");
+            out.println("<a href=\"index.jsp\">Index</a>");
             out.println("</body>");
             out.println("</html>");
         }

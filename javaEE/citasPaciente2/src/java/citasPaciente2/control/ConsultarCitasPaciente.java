@@ -60,6 +60,7 @@ public class ConsultarCitasPaciente extends HttpServlet {
                 +"<td>Modificar</td>"
                 +"<td>Eliminar</td>"
                 +"<td>Consultar</td>"
+                +"<td>Estatus cita</td>"
                 + "</tr>"
                 );
             
@@ -78,6 +79,7 @@ public class ConsultarCitasPaciente extends HttpServlet {
                       +"<td>Modificar cita</td>"
                       +"<td>Eliminar cita</td>"
                       +"<td><a href=\"ConsultarCita?idCita="+c.getIdcita()+"\">Consultar cita</a></td>"
+                      +"<td>"+c.getEstatus()+"</td>"
                       +"</tr>"
                       ); 
                     }else{
@@ -86,6 +88,7 @@ public class ConsultarCitasPaciente extends HttpServlet {
                       +"<td><a href=\"AjustarCita?idCita="+c.getIdcita()+"\">Modificar cita</a></td>"
                       +"<td><a href=\"EliminarCita?idCita="+c.getIdcita()+"\">Eliminar cita</a></td>"
                       +"<td><a href=\"ConsultarCita?idCita="+c.getIdcita()+"\">Consultar cita</a></td>"
+                      +"<td>"+c.getEstatus()+"</td>"
                       +"</tr>"
                       );
                     }
