@@ -7,6 +7,7 @@ package citasPaciente2.control;
 
 import citasPaciente2.modelo.Cita;
 import citasPaciente2.modelo.Consulta;
+import citasPaciente2.modelo.Paciente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -41,10 +42,14 @@ public class ConsultarCita extends HttpServlet {
         
         //emf = Persistence.createEntityManagerFactory("citasPacientes2PU");
         CitaJpaController controlCita = new CitaJpaController(utx, emf);
+        PacienteJpaController controlPaciente = new PacienteJpaController(utx, emf);
         
         try (PrintWriter out = response.getWriter()) {
             
             int idCita = Integer.parseInt(request.getParameter("idCita"));
+            int idPaciente = Integer.parseInt(request.getParameter("idPaciente"));
+            Paciente p = controlPaciente.findPaciente(idPaciente);
+            
             Cita c = controlCita.findCita(idCita);
             
             out.println("<!DOCTYPE html>");
@@ -54,7 +59,8 @@ public class ConsultarCita extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<form action=\"AgregarDiagnostico?idCita="+idCita+"\" method=\"post\">");
-            out.println("<h1>Escriba el dignóstico de la consulta</h1>");
+            out.println("<h1>Diagnóstico de la consulta</h1>");
+            out.println("<h1>Paciente: "+p.getNombre()+"</h1>");
             out.println("<table aling='left' width='80%' border=1><tbody>");
             out.println("<tr>");
             out.println("<td>Fecha</td>");
@@ -75,11 +81,13 @@ public class ConsultarCita extends HttpServlet {
             if(listaConsultas.size() > 0){
                 diagnostico = listaConsultas.get(0)[2].toString();
             }
-            
-            if(c.getEstatus() != null){
-                //String d = c.getEstatus();
+            System.out.println(c.getEstatus());
+            //sorry for this
+            if(c.getEstatus().length() > 10){ // > "pendiente", es decir, tiene la cadena "Asistió a su cita :D"
+                //imprime su diagnostico
                 out.println("<td>"+diagnostico+"</td>");
             }else{
+                //registra su diagnostico
                 out.println("<td><input type=\"text\" name=\"stringDiagnostico\" placeholder=\"escriba aqui el diagnóstico\"></td>");
                 out.println("<td><input type=\"submit\" value=\"Aceptar\"/></td>");    
             }
