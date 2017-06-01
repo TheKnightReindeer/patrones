@@ -7,13 +7,14 @@ package citasPaciente2.control;
 
 import citasPaciente2.modelo.Cita;
 import citasPaciente2.modelo.Consulta;
-import citasPaciente2.modelo.Paciente;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Time;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Resource;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,8 +27,9 @@ import javax.transaction.UserTransaction;
  *
  * @author maldad
  */
-@WebServlet(name = "SeleccionHoraCita", urlPatterns = {"/SeleccionHoraCita"})
-public class SeleccionHoraCita extends HttpServlet {
+@WebServlet(name = "ConsultarCita", urlPatterns = {"/ConsultarCita"})
+public class ConsultarCita extends HttpServlet {
+
     @PersistenceUnit
     private EntityManagerFactory emf;
     @Resource
@@ -39,44 +41,52 @@ public class SeleccionHoraCita extends HttpServlet {
         
         //emf = Persistence.createEntityManagerFactory("citasPacientes2PU");
         CitaJpaController controlCita = new CitaJpaController(utx, emf);
-        PacienteJpaController controlPaciente = new PacienteJpaController(utx, emf);
         
         try (PrintWriter out = response.getWriter()) {
             
-            int idPaciente = Integer.parseInt(request.getParameter("idPaciente")); //viene del select
-            Paciente p = controlPaciente.findPaciente(idPaciente);
-            Cita c = new Cita();
-            c.setPaciente(p);
-            Date fechaCita = new Date(AgregarCita.anio - 1900, AgregarCita.mes - 1, //Date empieza los meses desde 0 :/ y regresa los años -1900 atrás (¬_¬)
-                    Integer.parseInt(request.getParameter("diaCita")));
-            c.setFecha(fechaCita);
-            
-            Date horaCita = new Time(AgregarCita.hora, AgregarCita.minuto, 0);
-            c.setHora(horaCita);
+            int idCita = Integer.parseInt(request.getParameter("idCita"));
+            Cita c = controlCita.findCita(idCita);
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SeleccionHoraCita</title>");            
+            out.println("<title>Servlet ConsultarCita</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Registro de nueva cita: </h1>");
-            out.println("<h3>Paciente: " + p.getNombre() + "</h3>");
-            out.println("<h3>Fecha: " + c.getFecha() + "</h3>");
-            out.println("<h3>Hora: " + c.getHora() + "</h3>");
+            out.println("<form action=\"AgregarDiagnostico?idCita="+idCita+"\" method=\"post\">");
+            out.println("<h1>Escriba el dignóstico de la consulta</h1>");
+            out.println("<table aling='left' width='80%' border=1><tbody>");
+            out.println("<tr>");
+            out.println("<td>Fecha</td>");
+            out.println("<td>Hora</td>");
+            out.println("<td>Diagnóstico</td>");
+            out.println("</tr>");
             
-            try{
-                controlCita.create(c);    
-                //response.sendRedirect("index.jsp");
-                out.println("<h1> agregada correctamente </h1>");
-            }catch(Exception e){
-                out.println("<h1> error al agregar cita" + request.getContextPath() + " </h1>");
-            }finally{
-                out.println("<a href=\"index.jsp\">Index</a>");
-                out.println("</body>");
-                out.println("</html>");
-                out.close();
+            out.println("<tr>");
+            out.println("<td>"+c.getFecha()+"</td>");
+            out.println("<td>"+c.getHora()+"</td>");
+            
+            //hacer una consulta a la tabla consultas y obtener el diagnostico
+            String query = "SELECT * FROM MALDAD.CONSULTA WHERE CITA = " + c.getIdcita();
+            EntityManager em = emf.createEntityManager();
+            List<Object[]> listaConsultas = em.createNativeQuery(query).getResultList();
+            
+            String diagnostico = "";
+            if(listaConsultas.size() > 0){
+                diagnostico = listaConsultas.get(0)[2].toString();
             }
+            
+            if(c.getEstatus() != null){
+                //String d = c.getEstatus();
+                out.println("<td>"+diagnostico+"</td>");
+            }else{
+                out.println("<td><input type=\"text\" name=\"stringDiagnostico\" placeholder=\"escriba aqui el diagnóstico\"></td>");
+                out.println("<td><input type=\"submit\" value=\"Aceptar\"/></td>");    
+            }
+            out.println("</tr>");
+            out.println("</tbody></table>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

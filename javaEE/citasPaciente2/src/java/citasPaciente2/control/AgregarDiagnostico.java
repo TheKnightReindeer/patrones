@@ -1,52 +1,88 @@
-package citasPaciente2.control;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package citasPaciente2.control;
 
+import citasPaciente2.modelo.Cita;
+import citasPaciente2.modelo.Consulta;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.UserTransaction;
 
 /**
  *
  * @author maldad
  */
-@WebServlet(urlPatterns = {"/ConsultarPacienteNombre"})
-public class ConsultarPacienteNombre extends HttpServlet {
+@WebServlet(name = "AgregarDiagnostico", urlPatterns = {"/AgregarDiagnostico"})
+public class AgregarDiagnostico extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    @PersistenceUnit
+    private EntityManagerFactory emf;
+    @Resource
+    private UserTransaction utx;
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        //emf = Persistence.createEntityManagerFactory("citasPacientes2PU");
+        CitaJpaController controlCita = new CitaJpaController(utx, emf);
+        ConsultaJpaController controlConsulta = new ConsultaJpaController(utx, emf);
+        
+        int idCita = Integer.parseInt(request.getParameter("idCita"));
+        String diagnostico = request.getParameter("stringDiagnostico");
+        Cita c = controlCita.findCita(idCita);
+        
+        
+        
+        Consulta con = new Consulta();
+        con.setCita(c);
+        con.setDiagnostico(diagnostico);
+        c.setEstatus("Asistió a su cita :D");
+        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ConsultarPacienteNombre</title>");            
+            out.println("<title>Servlet AgregarDiagnostico</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Paciente a buscar...</h1>");
-            out.println("<form action=\"ListarBusquedaPaciente\" method=\"post\"/>");
-            out.println("<input type=\"text\" placeholder=\"nombre...\" name=\"busqueda\"/>");
-            out.println("<input type=\"submit\" value=\"Buscar...\"/>");
-            out.println("</body>");
-            out.println("</html>");
+            
+            
+            try{
+                //controlCita.create(c);
+                controlCita.edit(c);
+                //response.sendRedirect("index.jsp");
+                out.println("<h1> estatus cita modificado correctamente </h1>");
+            }catch(Exception e){
+                out.println("<h1> error al modificar cita" + request.getContextPath() + " </h1>");
+            }
+            
+            try{
+                controlConsulta.create(con);
+                out.println("<h1> consulta creada correctamente </h1>");
+            }catch(Exception e){
+                out.println("<h1> error al crear consulta" + request.getContextPath() + " </h1>");   
+            }
+            finally{
+                out.println("<a href=\"index.jsp\">Index</a>");
+                out.println("</body>");
+                out.println("</html>");
+                out.close();
+            }
         }
     }
 

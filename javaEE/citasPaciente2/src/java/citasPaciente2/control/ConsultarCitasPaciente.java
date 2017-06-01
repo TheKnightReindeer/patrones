@@ -1,10 +1,12 @@
 package citasPaciente2.control;
 
 import citasPaciente2.modelo.Cita;
+import citasPaciente2.modelo.Consulta;
 import citasPaciente2.modelo.Paciente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
@@ -36,6 +38,7 @@ public class ConsultarCitasPaciente extends HttpServlet {
         PacienteJpaController controlPaciente = new PacienteJpaController(utx, emf);
         List<Cita> listaCitas = controlCita.findCitaEntities();
         
+        
         int idPaciente = Integer.parseInt(request.getParameter("idPaciente"));
         Paciente p = controlPaciente.findPaciente(idPaciente);
         LocalDate hoy = LocalDate.now();
@@ -50,12 +53,13 @@ public class ConsultarCitasPaciente extends HttpServlet {
             out.println("<body>");
             
             out.println("<h1>Paciente: "+p.getNombre()+"</h1>");
-            out.println("<table aling='left' width='60%' border=1>");
+            out.println("<table aling='left' width='80%' border=1>");
             out.println(
                 "<tr><td class='datos'>Fecha</td>"
                 +"<td class='datos'>Hora</td>"
                 +"<td>Modificar</td>"
                 +"<td>Eliminar</td>"
+                +"<td>Consultar</td>"
                 + "</tr>"
                 );
             
@@ -72,7 +76,8 @@ public class ConsultarCitasPaciente extends HttpServlet {
                        out.println("<tr><td class='datos'>"+fecha+"</td>"
                       +"<td class='datos'>"+hora+"</td>"
                       +"<td>Modificar cita</td>"
-                      +"<td>Eliminar cita</a></td>"
+                      +"<td>Eliminar cita</td>"
+                      +"<td><a href=\"ConsultarCita?idCita="+c.getIdcita()+"\">Consultar cita</a></td>"
                       +"</tr>"
                       ); 
                     }else{
@@ -80,6 +85,7 @@ public class ConsultarCitasPaciente extends HttpServlet {
                       +"<td class='datos'>"+hora+"</td>"
                       +"<td><a href=\"AjustarCita?idCita="+c.getIdcita()+"\">Modificar cita</a></td>"
                       +"<td><a href=\"EliminarCita?idCita="+c.getIdcita()+"\">Eliminar cita</a></td>"
+                      +"<td><a href=\"ConsultarCita?idCita="+c.getIdcita()+"\">Consultar cita</a></td>"
                       +"</tr>"
                       );
                     }
